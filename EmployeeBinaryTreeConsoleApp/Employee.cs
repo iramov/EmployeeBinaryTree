@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinaryTreeConsoleApplication
 {
-    public class Employee : IEquatable<Employee>
+    public class Employee
     {
         public string FirstName { get; set; }
 
@@ -22,9 +20,15 @@ namespace BinaryTreeConsoleApplication
             return FirstName.GetHashCode();
         }
 
-        public bool Equals(Employee other)
+        public override bool Equals(object other)
         {
-            return this.FirstName.Equals(other.FirstName);
+            var employee = other as Employee;
+            if (other == null || employee == null)
+            {
+                return false;
+            }
+
+            return this.FirstName.Equals(employee.FirstName);
         }
     }
 }

@@ -55,7 +55,7 @@ namespace BinaryTreeConsoleApplication
                     BinaryTreeNode<Employee> employeeTwoNode = new BinaryTreeNode<Employee>(employeeTwo);
 
                     //Calling the LCA for the builded tree with the (root, firstSearched, secondSearched) and returning their Boss
-                    BinaryTreeNode<Employee> searchedBoss = employeeTree.LCA(employeeTree.Root, employeeOneNode, employeeTwoNode);
+                    BinaryTreeNode<Employee> searchedBoss = employeeTree.LeastCommonSearch(employeeTree.Root, employeeOneNode, employeeTwoNode);
 
                     if (searchedBoss == null)
                     {

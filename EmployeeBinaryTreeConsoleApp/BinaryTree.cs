@@ -59,31 +59,51 @@ namespace BinaryTreeConsoleApplication
         }
 
         // Returns the number of matches of firstEmployee and the second one in the subtree.
-        private int countMatches(BinaryTreeNode<Employee> root, BinaryTreeNode<Employee> firstEmployee, BinaryTreeNode<Employee> secondEmployee)
+        private int CountMatches(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee)
         {
-            if (root == null ) return 0;
-            int matches = countMatches(root.LeftChild, firstEmployee, secondEmployee) + countMatches(root.RightChild, firstEmployee, secondEmployee);
-            if (root.Value.FirstName == firstEmployee.Value.FirstName || root.Value.FirstName == secondEmployee.Value.FirstName)
-              return 1 + matches;
-            else
-              return matches;
+            if (root == null) 
+            {
+                return 0;
             }
+ 
+            int matches = CountMatches(root.LeftChild, firstEmployee, secondEmployee) + CountMatches(root.RightChild, firstEmployee, secondEmployee);
+            if (root.Value.Equals(firstEmployee.Value) || root.Value.Equals(secondEmployee.Value))
+            {
+                return 1 + matches;
+            }
+            else
+            {
+                return matches;
+            }
+        }
 
         //Searching for the LeastCommonAncestor top-bottom counting the matches in each subtree and deciding where to go next left or right
-        public BinaryTreeNode<Employee> LCA(BinaryTreeNode<Employee> root, BinaryTreeNode<Employee> firstEmployee, BinaryTreeNode<Employee> secondEmployee) 
+        public BinaryTreeNode<T> LeastCommonSearch(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee) 
         {
-            if (root == null || firstEmployee == null || secondEmployee == null) return null;
-            if (root.Value.FirstName == firstEmployee.Value.FirstName || root.Value.FirstName == secondEmployee.Value.FirstName) return root;
-            int totalMatches = countMatches(root.LeftChild, firstEmployee, secondEmployee);
+            if (root == null || firstEmployee == null || secondEmployee == null) 
+            {
+                return null;
+            }
+            if (root.Value.Equals(firstEmployee.Value) || root.Value.Equals(secondEmployee.Value))
+            { 
+                return root;
+            } 
+            int totalMatches = CountMatches(root.LeftChild, firstEmployee, secondEmployee);
             //The searched Nodes are at each side of this Node
             if (totalMatches == 1)
-              return root;
+            {
+                return root;
+            }
             //The searched Nodes are at the left side of this Node and proceeding with the left subtree
             else if (totalMatches == 2)
-              return LCA(root.LeftChild, firstEmployee, secondEmployee);
-            else // totalMatches == 0 going for the right subtree 
-              return LCA(root.RightChild, firstEmployee, secondEmployee);
+            {
+                return LeastCommonSearch(root.LeftChild, firstEmployee, secondEmployee);
+            }
+            // totalMatches == 0 going for the right subtree 
+            else 
+            {
+                return LeastCommonSearch(root.RightChild, firstEmployee, secondEmployee);
+            }
         }
-        
     }
 }
