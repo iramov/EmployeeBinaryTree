@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BinaryTreeConsoleApplication
+﻿namespace BinaryTreeConsoleApplication
 {
+    using System;
+
     public class BinaryTree<T>
     {
         private BinaryTreeNode<T> root;
@@ -59,7 +55,7 @@ namespace BinaryTreeConsoleApplication
         }
 
         // Returns the number of matches of firstEmployee and the second one in the subtree.
-        private int CountMatches(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee)
+        private static int CountMatches(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee)
         {
             if (root == null) 
             {
@@ -78,7 +74,7 @@ namespace BinaryTreeConsoleApplication
         }
 
         //Searching for the LeastCommonAncestor top-bottom counting the matches in each subtree and deciding where to go next left or right
-        public BinaryTreeNode<T> LeastCommonSearch(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee) 
+        public static BinaryTreeNode<T> LeastCommonAncestor(BinaryTreeNode<T> root, BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee) 
         {
             if (root == null || firstEmployee == null || secondEmployee == null) 
             {
@@ -97,13 +93,18 @@ namespace BinaryTreeConsoleApplication
             //The searched Nodes are at the left side of this Node and proceeding with the left subtree
             else if (totalMatches == 2)
             {
-                return LeastCommonSearch(root.LeftChild, firstEmployee, secondEmployee);
+                return LeastCommonAncestor(root.LeftChild, firstEmployee, secondEmployee);
             }
             // totalMatches == 0 going for the right subtree 
             else 
             {
-                return LeastCommonSearch(root.RightChild, firstEmployee, secondEmployee);
+                return LeastCommonAncestor(root.RightChild, firstEmployee, secondEmployee);
             }
+        }
+
+        public BinaryTreeNode<T> LeastCommonAncestor(BinaryTreeNode<T> firstEmployee, BinaryTreeNode<T> secondEmployee)
+        {
+            return LeastCommonAncestor(this.root, firstEmployee, secondEmployee);
         }
     }
 }

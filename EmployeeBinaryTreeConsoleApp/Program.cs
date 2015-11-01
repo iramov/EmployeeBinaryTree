@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BinaryTreeConsoleApplication
+﻿namespace BinaryTreeConsoleApplication
 {
+    using System;
+    using System.Collections.Generic;
+
     class Program
     {
         static void Main(string[] args)
@@ -55,7 +52,7 @@ namespace BinaryTreeConsoleApplication
                     BinaryTreeNode<Employee> employeeTwoNode = new BinaryTreeNode<Employee>(employeeTwo);
 
                     //Calling the LCA for the builded tree with the (root, firstSearched, secondSearched) and returning their Boss
-                    BinaryTreeNode<Employee> searchedBoss = employeeTree.LeastCommonSearch(employeeTree.Root, employeeOneNode, employeeTwoNode);
+                    BinaryTreeNode<Employee> searchedBoss = employeeTree.LeastCommonAncestor(employeeOneNode, employeeTwoNode);
 
                     if (searchedBoss == null)
                     {
