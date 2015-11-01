@@ -21,12 +21,24 @@
                 if (pair.Key.FirstName == employee.FirstName)
                 {
                     //taking the left and right child of this node
-                    var employeeLeftSubordinate = pair.Value[0];
-                    var employeeRightSubordinate = pair.Value[1];
-                    //building the tree recursively by building first the left subtree and then the right
-                    tree = new BinaryTree<Employee>(employee, recursiveTreeBuilder(employeeLeftSubordinate, employees),
-                                                               recursiveTreeBuilder(employeeRightSubordinate, employees));
-                    return tree;
+                    if (pair.Value.Count == 2)
+                    {
+                        var employeeLeftSubordinate = pair.Value[0];
+                        var employeeRightSubordinate = pair.Value[1];
+                        //building the tree recursively by building first the left subtree and then the right
+                        tree = new BinaryTree<Employee>(employee, recursiveTreeBuilder(employeeLeftSubordinate, employees),
+                                                                   recursiveTreeBuilder(employeeRightSubordinate, employees));
+                        return tree;
+                    }
+                    else
+                    {
+                        var employeeLeftSubordinate = pair.Value[0];
+                        //building the tree recursively by building first the left subtree and then the right
+                        tree = new BinaryTree<Employee>(employee, recursiveTreeBuilder(employeeLeftSubordinate, employees),
+                                                                   null);
+                        return tree;
+                    }
+                    
                 }
             }
             //When it reaches a leaf(node with no children) it returns it as tree with only a root and no children
