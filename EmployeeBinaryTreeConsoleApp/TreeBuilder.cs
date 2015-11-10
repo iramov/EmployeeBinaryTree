@@ -5,7 +5,7 @@
     public class TreeBuilder
     {
         /// <summary>
-        /// Static method for building a binary tree and returning it
+        /// Static method for building a binary tree with Employees and returning it
         /// </summary>
         /// <param name="employee">Current employee(at the start the root)</param>
         /// <param name="employees">Dictionary with employees</param>

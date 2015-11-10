@@ -50,7 +50,7 @@
                 string[] words = line.Split(splitters, StringSplitOptions.RemoveEmptyEntries);
 
                 //
-                if (words.Length > 0)
+                if (words.Length == 2)
                 {
                     //The first word in the line is the boss name and the second is the subordinate ones
                     Employee boss = new Employee();
